@@ -1,0 +1,8 @@
+Think like an attacker. Break into a website!
+
+Form groups of 2 or 3 students.  Go to http://cs31.cs.sjsu.edu/ and click on "basic login example".  Your job is to break in to this site.  Review some common passwords from http://www.zdnet.com/blog/security/25-most-used-passwords-revealed-is-yours-one-of-them/12427.
+
+Find a username and password and use it to log in to the website.  (Note that many of the usernames are based on the names of superheroes).
+
+What username did you discover?  What is the password for that username?  Submit as many usernames and passwords as you are able to guess.  (If you do not have a Canvas account, email me at thomas.austin@sjsu.edu).
+
