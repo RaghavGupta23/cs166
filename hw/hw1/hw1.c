@@ -45,32 +45,16 @@ int main(int argc, char* argv[]) {
 }
 
 void myreverse(char* input, char * rev, int len) {
-  // printf("%s, %s, %i\n", input, rev, len);
-
   // Operating directly on rev produces warnings
   // Instead use r and strcpy to rev
   char * r = (char*) malloc(sizeof(input));
 
-  // // contents of input
-  // printf("input\n");
-  // for (int i = 0; i < len+1; ++i) {
-  //   printf("%c\n", input[i]);
-  // }
-
   // reverse
-  // printf("reversing\n");
   for (int i = 0; i < len; ++i) {
-    // printf("%d: %c\n", i, input[i]);
     r[len-1-i] = input[i];
   }
   r[len+1] = '\0'; // null terminator
 
-  // // contents of rev
-  // printf("r\n");
-  // for (int i = 0; i < len+1; ++i) {
-  //   printf("%c\n", r[i]);
-  // }
-  // printf("Finished product: %s\n", r);
   strcpy(rev, r);
 }
 
