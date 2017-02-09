@@ -8,4 +8,6 @@
 > 
 > If not, what type of attacks would be a concern?
 
-Yes, it is secure, since this is the same as CTR. It would be vulnerable to frequency analysis within each ciphertext block. Or, if some plaintext is known, E(K, IV+i) can be found, and since IV is known, that will hint towards what K is.
+Yes, it is secure, since this formula is the same as CTR assuming the order of parameters is irrelevant.
+
+However, it would be vulnerable to frequency analysis within each ciphertext block. Or, if some plaintext is known, E(K, IV+i) can be found, and since IV is known, that will hint towards what K is.
