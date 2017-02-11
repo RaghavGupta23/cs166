@@ -57,22 +57,58 @@ c. Years to find key with 2^256 keyspace?
 Confusion and diffusion
 
 a. Define each in terms of crypto
-- Confusion: making ciphertext look different from plaintext
-- Diffusion: distributing plaintext in resulting ciphertext
+Confusion is making the ciphertext look different from plaintext, while diffusion is distributing the plaintext throughout the resulting ciphertext.
 
 b. Cipher that only uses confusion
+Substitution ciphers and one-time pads would solely use confusion.
 
 c. Cipher that only uses diffusion
+Transposition ciphers rely only on diffusion.
 
 d. Cipher that uses both
+Cipher used in the Election of 1876 involved transposition and a codebook, or confusion and diffusion.
 
 ## 10
 
+Crack the ciphertext (substitution):
+
+```
+MXDXBVTZWVMXNSPBQXLIMSCCSGXSCJXBOVQXCJZMOJZCVC
+TVWJCZAAXZBCSSCJXBqCJZCQJZCNSPOXBXSBTVWJC
+JZDXGXXMOZQMSCSCJXBOVQXCJZMOJZCNSPJZHGXXMOSPLH
+JZDXZAAXZBXHCSCJXTCSGXSCJXBOVQX
+```
+
+NEVERIMAGINEYOURSELFNOTTOBEOTHERWISETHANWHATIT
+MIGHTAPPEARTOOTHERSTHATSHATYOUWEREORMIGHT
+HAVEBEENWASNOTOTHERWISETHANWHATYOUHARBEENWOULR
+HAVEAPPEARERTOTHEMTOBEOTHERWISE
+
 ## 12
+
+Program for substitution
+
+Refer to `10_2.py`.
 
 ## 14
 
+Encrypt following text with double transposition cipher
+
+> we are all together
+
+
+
 ## 19
+
+Using table 2.1, ciphertext `KITLKE` encrypted with one-time pad. What is key when:
+
+a. plaintext is thrill
+lkistl
+
+b. plaintext is tiller
+lekekr
+
+Also refer to `19.py`
 
 ## 22
 
