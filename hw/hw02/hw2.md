@@ -81,22 +81,20 @@ JZDXZAAXZBXHCSCJXTCSGXSCJXBOVQX
 
 NEVERIMAGINEYOURSELFNOTTOBEOTHERWISETHANWHATIT
 MIGHTAPPEARTOOTHERSTHATSHATYOUWEREORMIGHT
-HAVEBEENWASNOTOTHERWISETHANWHATYOUHARBEENWOULR
-HAVEAPPEARERTOTHEMTOBEOTHERWISE
+HAVEBEENWASNOTOTHERWISETHANWHATYOUHADBEENWOULD
+HAVEAPPEAREDTOTHEMTOBEOTHERWISE
 
 ## 12
 
 Program for substitution
 
-Refer to `10_2.py`.
+Refer to `10.c`.
 
 ## 14
 
-Encrypt following text with double transposition cipher
+Encrypt `we are all together` with double transposition cipher, 4x4 matrix, row 1234->2413, column 1234->3124
 
-> we are all together
-
-
+leagetwtaheolrre
 
 ## 19
 
@@ -112,4 +110,33 @@ Also refer to `19.py`
 
 ## 22
 
+Codebook with excerpt:
+
+> 123 once
+> 199 or
+> 202 maybe
+> 221 twice
+> 233 time
+> 332 upon
+> 451 a
+
+Decrypt
+> 242 554 650 464 532 749 567
+
+assuming additive sequence:
+> 119 222 199 231 333 547 346
+
+once up a time or maybe twice
+
 ## 26
+
+Forward search attack
+
+a. How to conduct
+Encrypted message probably in small set of possibilities, all possibilities are encrypted to see if they match the encrypted message. This works in public key crypto since public keys are known to all.
+
+b. How to prevent
+Sufficiently large keyspace for message that the message itself cannot be guessed.
+
+c. Why can't it be used on symmetric ciphers
+Encryption/decryption relies on same key which is kept secret. Malicious user is thus unable to try encrypting and comparing resulting cipher text.
