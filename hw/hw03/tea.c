@@ -14,18 +14,8 @@
  * Also, note that the key is stored in 4 32-bit blocks.
  */
 void encrypt(uint32_t* text, uint32_t* key) {
-    // This is what we got
-    // printf("%02X\n", text[0]);
-    // printf("%02X\n", text[1]);
-    // printf("%02X\n", key[0]);
-    // printf("%02X\n", key[1]);
-    // printf("%02X\n", key[2]);
-    // printf("%02X\n", key[3]);
-
     // Do some magic
-    // printf("%02LX\n", sum);
     uint32_t delta = 0x9E3779B9;
-    // printf("%02LX\n", delta);
     uint32_t sum = 0x0;
 
     for (int i = 0; i < 32; ++i) {
@@ -33,9 +23,6 @@ void encrypt(uint32_t* text, uint32_t* key) {
         text[0] += ((text[1] << 4) + key[0]) ^ (text[1] + sum) ^ ((text[1] >> 5) + key[1]);
         text[1] += ((text[0] << 4) + key[2]) ^ (text[0] + sum) ^ ((text[0] >> 5) + key[3]);
     }
-
-    // return text;
-    // Encryption in place so nothing to return
 }
 
 /*
@@ -45,7 +32,6 @@ void encrypt(uint32_t* text, uint32_t* key) {
 void decrypt(uint32_t* text, uint32_t* key) {
     // Do some magic
     uint32_t delta = 0x9E3779B9;
-    // printf("%02LX\n", delta);
     uint32_t sum = delta << 5;
 
     for (int i = 0; i < 32; ++i) {
@@ -82,6 +68,7 @@ void ecb_mode_test() {
     printf("(ECB) plaintext = ");
     print_arr(text, 10);
 
+    // Encrypt
     for (i=0; i<10; i+=2) {
         encrypt(text+i, key);
     }
@@ -89,6 +76,7 @@ void ecb_mode_test() {
     printf("(ECB) ciphertext= ");
     print_arr(text, 10);
 
+    // Decrypt
     for (i=0; i<10; i+=2) {
         decrypt(text+i, key);
     }
@@ -119,7 +107,7 @@ void cbc_mode_test() {
     printf("(CBC) plaintext = ");
     print_arr(text, 10);
 
-    /*************************** YOUR CODE HERE ***************************************/
+    // Encrypt
     // Ci = E(Pi ^ Ci-1, K)
     text[0] ^= iv[0];
     text[1] ^= iv[1];
@@ -133,7 +121,7 @@ void cbc_mode_test() {
     printf("(CBC) ciphertext= ");
     print_arr(text, 10);
 
-    /*************************** YOUR CODE HERE ***************************************/
+    // Decrypt
     // Pi = D(Ci, K) ^ Ci-1
     // Should be a way to save only current & prev ciphertext instead of all
     // Previous attempt had persistent bugs though :(
@@ -146,7 +134,6 @@ void cbc_mode_test() {
     text[1] ^= iv[1];
     for (int i = 2; i < 10; i += 2) {
         decrypt(text + i, key);
-     
         text[i] ^= ciphertext[i-2];
         text[i+1] ^= ciphertext[i-1];
     }
@@ -180,7 +167,7 @@ void ctr_mode_test() {
     printf("(CTR) plaintext = ");
     print_arr(text, 10);
 
-    /*************************** YOUR CODE HERE ***************************************/
+    // Encrypt
     // Ci = Pi ^ E(IV - i, K)
     for (int i = 0; i < 10; i += 2) {
         iv[0] = iv_left - i;
@@ -193,7 +180,7 @@ void ctr_mode_test() {
     printf("(CTR) ciphertext= ");
     print_arr(text, 10);
 
-    /*************************** YOUR CODE HERE ***************************************/
+    // Decrypt
     // Pi = Ci ^ E(IV - i, K)
     for (int i = 0; i < 10; i += 2) {
         iv[0] = iv_left - i;
