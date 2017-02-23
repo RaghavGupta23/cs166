@@ -19,3 +19,22 @@ Lab
 > Is there any difference in file size for the new image?
 > Send the new bitmap to your partner.
 > Is he or she able to read the file from the bitmap?
+
+## Part 1
+
+(12, 7)
+(18, 9)
+secret = (0, S)
+
+slope = (9-7) / (18-12) = 2/6 = 1/3
+
+Y intercept = Y - slope * X
+= 7 - 1/3 * 12
+= 7 - 4
+= **3**
+
+## Part 2
+
+Yes, retrieved pdf appears to be completely valid.
+
+Stegan-ized image has the same size. The retrieved file can be read and has the same SHA256 sum as the original file.
