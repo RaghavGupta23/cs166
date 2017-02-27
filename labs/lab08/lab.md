@@ -1,5 +1,6 @@
 Lab 08
 ==============================
+
 Download `Cracker.java` and `passwords.txt` from http://www.cs.sjsu.edu/~austin/cs265-spring15/lab08 (Links to an external site.).  The file `passwords.txt` provides a list of common passwords.  `Cracker.java` uses this file, parses a file of usernames and hashes, and prints out any username/password combinations it identifies.
 
 Note that `passwords.txt` is a large file.  You may need to provide additional memory for java, like so: `java -Xms512m -Xmx512m Cracker passwords.txt input.txt`
