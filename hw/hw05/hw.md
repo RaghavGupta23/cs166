@@ -7,7 +7,7 @@ Homework 05
 
 > hash function that produces values n bits long, how would brute force be implemented, and expected work factor
 
-A brute force would be done by generating all messages within the "key space" and feeding each message to the hashing algorithm. A collision is guaranteed after hashing all possible sequences n bits long, although due to the birthday problem, a collision is expected in half the "key space", or n/2. The expected workload is thus 2^(n/2) hashes to compute.
+A brute force would be done by generating all messages within the "key space" and feeding each message to the hashing algorithm. A collision is guaranteed after hashing all possible sequences n bits long, although due to the birthday problem, a collision is expected in half the "key space", or `n/2`. The expected workload is thus `2^(n/2)` hashes to compute.
 
 ## 4
 
@@ -15,10 +15,10 @@ A brute force would be done by generating all messages within the "key space" an
 
 a. hash function with 12 bit output, and hashes of 1024 random messages
 1024 = 2^10
-Due to the birthday problem, collisions are expected within 2^(12/2) messages. Since 1024 (2^10) is 2^4 times more, the expectation is  `2^4 = 16` collisions.
+Due to the birthday problem, collisions are expected within 2^(12/2) messages. Since 1024 (2^10) is `2^4` times more, the expectation is  `2^4 = 16` collisions.
 
 b. hash function with n bit output, and hashes of m random messages
-You'd expect to find a collision in 2^(n/2) messages due to the birthday problem, so it should be roughly `a - (n/2)` collisions, where `m = 2^a`.
+You'd expect to find a collision in `2^(n/2)` messages due to the birthday problem, so it should be roughly `a - (n/2)` collisions, where `m = 2^a`.
 
 ## 16
 
