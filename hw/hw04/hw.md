@@ -99,6 +99,8 @@ b. encrypt M = 1110
 
 Yes, assuming that Trudy gets Alice and Bob to send first, Trudy can then calculate each value including her t, and send that to the opposite party. The mod math would also work.
 
+> it would actually not work because Trudy would be actually be calculating g^(abt) mod p. The mod math wouuld **not** work.
+
 ## 37
 
 > Digital signature or MAC can be used for integrity checking
