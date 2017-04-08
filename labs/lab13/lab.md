@@ -9,13 +9,11 @@ Lab 13: Attack a Simple Protocol
 
 ## Attacks
 
-Note, R is nonce
-
-1. Replay attack
-2. Bob encrypts R for you. Send two connection requests, one with R and second with R+1. Bob sends you `E(R+1, K)`, used to complete the first connection.
+1. Replay attack: same message sent, no extra entropy.
+2. Multiple session attack: Bob encrypts R for you. Send two connection requests, one with R and second with R+1. Bob sends you `E(R+1, K)`, use it to complete the first connection.
 
 ## Fix it
 
-- Start off encrypted, Bob can ignore anything that doesn't decrypt
-- Bob sends his own challenge, along with Alice's nonce to prove his own identity
-- Alice verifies her nonce is intact, encrypt and reply with Bob's challenge
+- Since K is known beforehand, start off encrypted. Also, Bob can ignore anything that doesn't decrypt.
+- Bob's reply should include his own challenge
+- Alice sends back Bob's challenge instead
