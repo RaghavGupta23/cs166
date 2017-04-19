@@ -6,6 +6,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 
+/*
+ * Lab 16 Instructions
+ * 1. Add one extra coin to the miner's account in the ledger
+ * 2. Convert the new ledger to a String (`ledgeStr`)
+ * 3. Search for a "proof" where the result of `hash(ledgerStr + proof)` has `NUM_ZEROES` leading zeroes, similar to the hashcash protocol used for spam reduction in Chapter 5 of your textbook.
+ */
+
+
 public class Miner {
 
     public static int NUM_ZEROES = 22;
@@ -17,7 +25,37 @@ public class Miner {
     }
 
     public String findProof(Map<String,Integer> ledger) throws Exception {
-        return null;
+        // init values
+        Map<String, Integer> paid = ledger;
+        paid.put(this.name, paid.get(this.name) + 1);  // pay yourself
+        String ledgerStr = paid.toString();
+        String hashed;
+        int proof = 0;
+        boolean notFound = true;
+
+        // don't hard code the zero string
+        String zeroes = "";
+        for (int i = 0; i < NUM_ZEROES; i++)
+            zeroes += "0";
+
+        // GOOOOOOOO
+        while (notFound) {
+            // unobtrusive progress
+            if (proof % 100000 == 0)
+                System.out.print(".");
+            // hash and check
+            hashed = hash(ledgerStr + proof);
+            if (hashed.substring(0, NUM_ZEROES).equals(zeroes)) {
+                System.out.println("\nproof: " + proof);
+                System.out.println("hash:  " + hashed);
+                notFound = false;
+            } else {
+                // keep mining
+                proof++;
+            }
+        }
+
+        return proof + "";
     }
 
     public static String hash(String s) throws NoSuchAlgorithmException {
