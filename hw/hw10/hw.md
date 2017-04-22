@@ -125,25 +125,112 @@ Chances are Dave would get fired if he's discovered, although there doesn't seem
 
 ## 23
 
-> 23. IPSec cookies are also known as anti-clogging tokens.
+> IPSec cookies are also known as anti-clogging tokens.
 > a. What is the intended security purpose of IPSec cookies?
 > b. Why do IPSec cookies fail to fulfill their intended purpose?
 > c. Redesign the IPSec Phase 1 symmetric key signing main mode so that the IPSec cookies do serve their intended purpose.
 
+### A
 
+The cookies `IC` and `RC` are supposed to mitigate DoS attacks. By reducing connection state the server has to keep track of.
+
+### B
+
+Server still has to keep track of all the messages transmitted in order to create `proofB`, including the cookies themselves, so state is still kept.
+
+### C
+
+It could remain exactly the same, except Alice would also send `E(time, Kab)` in the first message. This proves to Bob that he's talking with someone in possession of the key without revealing the key itself. It also prevents replay attacks, so if Trudy copies the first message to flood Bob in a DoS attack, Bob can figure out the timestamp is old and won't continue the connection.
 
 ## 25
 
+> As noted in the text, IKE Phase 1 public key encryption aggressive mode allows Alice and Bob to remain anonymous. Since anonymity is usually given as the primary advantage of main mode over aggressive mode, is there any reason to ever use public key encryption main mode?
 
+Main mode is guaranteed to be implemented so you can assume another system has it implemented, versus aggressive mode which is optional to implement.
 
 ## 27
 
+> We say that Trudy is a passive attacker if she can only observe the messages sent between Alice and Bob. If Trudy is also able to insert, delete, or modify messages, we say that Trudy is an active attacker. If, in addition to being an active attacker, Trudy is able to establish a legitimate connection with Alice or Bob, then we say that Trudy is an insider. Consider **IKE Phase 1 digital signature main mode**.
+> a. As a passive attacker, can Trudy determine Alice’s identity?
+> b. As a passive attacker, can Trudy determine Bob’s identity?
+> c. As an active attacker, can Trudy determine Alice’s identity?
+> d. As an active attacker, can Trudy determine Bob’s identity?
+> e. As an insider, can Trudy determine Alice’s identity?
+> f. As an insider, can Trudy determine Bob’s identity?
 
+### A & B
+
+No, since key `K` is derived from DH key exchange. Therefore, passive attackers won't be able to get `g^(ab) mod p`, and won't be able to derive key `K`.
+
+### C
+
+Yes, Alice's identity can be leaked with an active attack. Trudy can MitM the DH exchange, get a valid K value, and decrypt the 5th message with Alice's identity.
+
+### D
+
+No, since following part C, the protocol prevents Trudy from sending Bob a valid response since she can't create a new proof. Bob will find the process has been tampered, and won't proceed.
+
+### E & F
+
+Yes, since Trudy was able to connect to Alice or Bob, Trudy must have been able to derive key `K`. Thus, she can decrypt the 5th and 6th messages, and retrieve Alice and Bob's identities.
 
 ## 37
 
+> WEP is supposed to protect data sent over a wireless link. As discussed in the text, WEP has many security flaws, one of which involves its use of initialization vectors, or IVs. WEP **IVs are 24 bits long**. WEP uses a fixed long-term key K. For each packet, WEP sends an IV in the clear along with the encrypted packet, where the packet is encrypted with a stream cipher using the key `KIV = (IV, K)`, that is, the **IV is pre-pended to the long-term key K**. Suppose that a particular WEP connection sends packets containing **1500 bytes over an 11 Mbps link**.
+> a. If the IVs are chosen at random, what is the expected amount of time until the first IV repeats? What is the expected amount of time until some IV repeats?
+> b. If the IVs are not selected at random but are instead selected in sequence, say, `IVi = i, for i = 0, 1, 2, ..., 224 − 1`, what is the expected amount of time until the first IV repeats? What is the expected amount of time until some IV is repeated?
+> c. Why is a repeated IV a security concern?
+> d. Why is WEP “unsafe at any key length” [321]? That is, why is WEP no more secure if K is 256 bits than if K is 40 bits? Hint: See [112] for more information.
 
+### A
+
+Seconds for a packet
+1500 bytes / 11 Mbps
+= (1500 bytes * 8 bits/byte) / (11 Mbps * 1000 Mb/bit)
+= 12000 bits / 11000 bits/s
+= 12/11 seconds
+
+IV repeated:
+2^24 / 2
+= 2^23
+
+12/11 * 2^23
+= **9151208.7 seconds, or 2542 hours**
+
+Some IV repeated:
+sqrt(2^24)
+= 2^(24/2)
+= 2^12
+
+12/11 * 2^12
+= **4468.4 seconds, or 1.24 hours**
+
+### B
+
+224 IVs are used in sequential order. Therefore, time for first IV to repeat is time for some IV to repeat. At one time, IV being used is assumed to be random, and on avg would be half IVs left before looping back.
+
+12/11 * 224/2
+= 12/11 * 112
+= **112.2 seconds**
+
+### C
+
+A repeated IV means that the key that the exact same key was also used to encrypt the data. That means, similar to the problems with ECB, you could infer about the encrypted contents, such as when the same data is encrypted.
+
+### D
+
+WEP improperly deals with keys in the first place (repeating them stream cipher keys, for one). Thus, any key size is insecure, as key size is irrelevant to the problem.
 
 ## 43
 
+> Give a secure one-message protocol that prevents cell phone cloning and establishes a shared encryption key. Mimic the GSM protocol.
 
+The phone sends a single message to the BTS:
+
+`IMSI, E(Kphone, Ki)`
+
+`IMSI`: SIM card's identifier
+`Kphone`: random shared key generated by the phone
+`Ki`: SIM card's secret
+
+THe BTS forwards this to the home network to validate, checking if the IMSI is valid, then decrypting `Kphone` and forwarding it to the BTS. The BTS then uses it to communicate with the phone.
