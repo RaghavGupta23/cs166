@@ -31,12 +31,13 @@ THe content can be changed to "kneel before zod" with the following, again in th
 
 Arbitrary queries can be entered by closing the query and commenting out the rest with `'; (your query here); --`. Using the postresql command to view all tables shows a user1 table, and `'; SELECT * FROM user1; --` returns all entries:
 
-| - | ----------- | -------- |
-| 1 | batman      | gotham   |
-| 2 | aquaman     | fish     |
-| 3 | guest       | guest    |
-| 4 | admin       | admin123 |
-| 5 | wolverine   | harley   |
-| 6 | superman    | superman |
-| 7 | wonderwoman | letmein  |
-| 8 | spiderman   | password |
+| id | name        | password  |
+| -- | ----------- | --------- |
+| 1  | batman      | gotham    |
+| 2  | aquaman     | fish      |
+| 3  | guest       | guest     |
+| 4  | admin       | admin123  |
+| 5  | wolverine   | harley    |
+| 6  | superman    | superman  |
+| 7  | wonderwoman | letmein   |
+| 8  | spiderman   | password  |
